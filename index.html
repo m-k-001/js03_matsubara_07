@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-2.1.3.min.js"></script>
+
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link
+    href="https://googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link href="https://googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>仮アドベンチャー</title>
+
+  <!-- 辞書（Import Map）を設定してJS側の読み込みエラーを防ぐ -->
+  <script type="importmap">
+      {
+        "imports": {
+          "three":  "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+        }
+      }
+    </script>
+
+</head>
+
+<body>
+
+  <!-- 3D描画エリア -->
+  <div id="canvas-container"></div>
+
+  <!-- アイテムゲット画面 -->
+  <div id="inspect-overlay" class="inspect-overlay">
+    <div id="inspect-title" class="inspect-title"></div>
+    <div id="inspect-hint" class="inspect-hint"></div>
+  </div>
+
+  <!-- タイトル画面 -->
+  <div id="title-screen" class="title-screen">
+    <p class="op-title">ROOM</p>
+    
+    <!-- <p class="op-title-sub">THE LAST ROOM = Episode[0];</p> -->
+
+    <div class="op-box"></div>
+    <div class="op-btn">
+      <div id="btn-start" class="btn-start">NEW GAME</div>
+      <div id="btn-retry" class="btn-retry">CONTINUE</div>
+    </div>
+  </div>
+
+  <!-- セーブ催促ダイアログ -->
+  <dialog id="save-dialog" class="save-dialog">
+    <p class="save-dialog-text01">アイテム取得完了</p>
+    <p class="save-dialog-text02">'りんご' 'レモン' 'たまねぎ'<br>３アイテムから推理して 数字を１つ選択</p>
+    <p class="save-dialog-text03">選択は１回 セーブしますか</p>
+    <div class="save-btn">
+      <div id="save-btn-yes" class="save-btn-yes">YES</div>
+      <div id="save-btn-no" class="save-btn-no">NO</div>
+    </div>
+  </dialog>
+
+  <!-- クリア画面 -->
+  <div id="result-overlay" class="result-overlay">
+    <div id="result-overlay-inner" class="result-overlay-inner">
+      <p class="result-overlay-inner-text00">5 : 正解</p>
+      <div class="result-overlay-inner-box"></div>
+      <p class="result-overlay-inner-text04">見事な推理力</p>
+      <p class="result-overlay-inner-text01">りんご => apple , レモン => lemon , たまねぎ => onion</p>
+      <p class="result-overlay-inner-text02">アルファベット ５文字</p>
+      <p class="result-overlay-inner-text03"></p>
+      
+      <div id="btn-to-title" class="btn-to-title">タイトルへ戻る</div>
+    </div>
+  </div>
+
+  <!-- ゲームオーバー画面 -->
+  <div id="gameover-overlay" class="gameover-overlay">
+    <div id="gameover-overlay-inner" class="gameover-overlay-inner">
+      <p class="gameover-overlay-inner-text01">選択ミス</p>
+      <div class="gameover-overlay-inner-box"></div>
+      <p class="gameover-overlay-inner-text02">アイテム名を変換して</p>
+      <div id="btn-gameover-to-title" class="btn-gameover-to-title">タイトルへ戻る</div>
+    </div>
+  </div>
+
+  <!-- 指示や行動履歴表示 -->
+  <div id="message-text" class="message-text"></div>
+
+
+
+
+  <!-- メインプログラムの読み込み -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+
+</html>

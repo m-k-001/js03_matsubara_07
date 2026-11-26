@@ -1,0 +1,348 @@
+ body {
+   margin: 0;
+   overflow: hidden;
+   background: #0a0a0c;
+   font-family: "Noto Sans JP", sans-serif;
+ }
+
+ /* 1. 画面全体の3Dキャンバス */
+ #canvas-container {
+   position: fixed;
+   inset: 0;
+   z-index: 1;
+ }
+
+ /* アイテムをゲットしたときに表示 */
+ .inspect-overlay {
+   pointer-events: none;
+   /* クリックがすり抜ける命令 */
+   position: fixed;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   inset: 0;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   display: none;
+   /* 最初は非表示 */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   z-index: 20;
+ }
+
+ .inspect-title {
+   font-family: "Noto Serif JP", serif;
+   font-size: 100px;
+   color: #ffffff;
+ }
+
+ .inspect-hint {
+   margin-top: 20px;
+   font-size: 16px;
+   color: #ffffff;
+ }
+
+
+ /* 指示や行動履歴表示 */
+ .message-text {
+   font-size: 16px;
+   line-height: 1.5;
+   font-weight: 300;
+   text-align: end;
+   color: #ffffff;
+   position: fixed;
+   right: 38px;
+   top: 60%;
+   transform: translateY(-50%);
+   pointer-events: none;
+   z-index: 10;
+ }
+
+ .message-text div:nth-child(1) {
+   font-size: 20px;
+   margin-bottom: 10px;
+ }
+
+ .message-text div:nth-child(2) {
+   font-size: 12px;
+ }
+
+ .message-text div:nth-child(3) {
+   font-size: 12px;
+   margin-bottom: 10px;
+ }
+
+ .message-text div:nth-child(n+4) {
+   font-size: 14px;
+ }
+
+
+
+ /* タイトル画面 */
+ .title-screen {
+   background-color: #000000;
+   position: fixed;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   inset: 0;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   z-index: 100;
+ }
+
+ .op-title {
+   font-family: 'Dela Gothic One', sans-serif;
+   color: #ffffff;
+   font-weight: bold;
+   font-size: 60px;
+ }
+
+ .op-title-sub{
+  font-family: 'Dela Gothic One', sans-serif;
+  background-color: #ffffff;
+   color: #000000;
+   font-weight: 500;
+   font-size: 10px;
+   padding: 2px 18px;
+ }
+
+ .op-box {
+   background-color: #ffffff;
+   width: 285px;
+   height: 1px;
+   margin: 10px 0;
+
+ }
+
+ .op-btn {
+   display: flex;
+   gap: 15px;
+ }
+
+ .btn-start,
+ .btn-retry {
+   font-family: 'Dela Gothic One', sans-serif;
+   color: #ffffff;
+   border: #ffffff solid 1px;
+   /* background-color: #d34040; */
+   font-weight: 500;
+   font-size: 20px;
+   padding: 5px 15px;
+ }
+
+ .btn-start:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
+
+ .btn-retry:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
+
+
+ /* セーブ催促ダイアログ */
+ .save-dialog {
+  /* dialog のデフォルトスタイルを完全に消去（リセット） */
+   border: none;
+   /* 黒い太枠を消す */
+   background: none;
+   /* 白い背景色を消す */
+   padding: 0;
+   /* 内側のデフォルト余白を消す */
+   color: inherit;
+   /* 文字色を親要素（bodyなど）に合わせる */
+   outline: none;
+   /* 開いた瞬間にでる青いフォーカス枠を消す */
+   max-width: none;
+   /* ブラウザ標準の幅制限を解除 */
+   max-height: none;
+   /* ブラウザ標準の高さ制限を解除 */
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+
+   border: #ffffff solid 1px;
+   background-color: #000000cc;
+   width: 400px;
+   height: 200px;
+ }
+
+ .save-dialog-text01{
+  font-size: 26px;
+  color: #ffffff;
+  margin-bottom: 15px;
+ }
+
+ .save-dialog-text02{
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 20px;
+ }
+
+ .save-dialog-text03{
+  font-size: 14px;
+  color: #ffffff;
+ }
+
+
+ .save-btn{
+  display: flex;
+  gap: 25px;
+ }
+
+ .save-btn-yes,
+ .save-btn-no {
+   font-family: 'Dela Gothic One', sans-serif;
+   color: #ffffff;
+   border: #ffffff solid 1px;
+   width: 50px;
+   /* background-color: #d34040; */
+   text-align: center;
+   font-weight: 500;
+   font-size: 20px;
+   padding: 5px 15px;
+ }
+
+ .save-btn-yes:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
+
+ .save-btn-no:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
+
+
+
+
+
+ /* クリア画面 */
+ .result-overlay {
+   display: none;
+   background-color: #000000;
+   position: fixed;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   inset: 0;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   z-index: 90;
+ }
+
+ .result-overlay-inner {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   color: #ffffff;
+ }
+
+ .result-overlay-inner-text00{
+  font-size: 58px;
+ }
+
+ .result-overlay-inner-box{
+  background-color: #ffffff;
+   width: 285px;
+   height: 1px;
+   margin: 10px 0;
+ }
+
+ .result-overlay-inner-text04{
+  font-size: 24px;
+  margin-bottom: 25px;
+ }
+
+ .result-overlay-inner-text01{
+  font-size: 16px;
+  margin-bottom: 8px;
+ }
+
+ .result-overlay-inner-text02{
+  font-size: 16px;
+  margin-bottom: 8px;
+ }
+
+ .result-overlay-inner-text03{
+  font-size: 16px;
+  margin-bottom: 30px;
+ }
+
+ .btn-to-title {
+   font-family: 'Dela Gothic One', sans-serif;
+   color: #ffffff;
+   border: #ffffff solid 1px;
+   text-align: center;
+   font-weight: 500;
+   font-size: 20px;
+   padding: 5px 15px;
+ }
+
+ .btn-to-title:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
+
+
+
+
+ /* ゲームオーバー画面 */
+ .gameover-overlay {
+   display: none;
+   background-color: #000000;
+   position: fixed;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   inset: 0;
+   /* 3D空間とまったく同じ大きさの透明なスクリーンを作るセット */
+   z-index: 80;
+ }
+
+ .gameover-overlay-inner {
+   width: 100%;
+   height: 100%;
+   color: #ffffff;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .gameover-overlay-inner-text01{
+  font-size: 58px;
+ }
+
+ .gameover-overlay-inner-box{
+   background-color: #ffffff;
+   width: 285px;
+   height: 1px;
+   margin: 10px 0;
+ }
+
+ .gameover-overlay-inner-text02{
+  font-size: 18px;
+  margin-bottom: 50px;
+ }
+
+ .btn-gameover-to-title {
+   font-family: 'Dela Gothic One', sans-serif;
+   color: #ffffff;
+   border: #ffffff solid 1px;
+   text-align: center;
+   font-weight: 500;
+   font-size: 20px;
+   padding: 5px 15px;
+
+ }
+
+ .btn-gameover-to-title:hover {
+   background-color: #ffffff;
+   color: #000;
+ }
